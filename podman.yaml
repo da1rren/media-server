@@ -52,6 +52,12 @@ spec:
     volumeMounts:
     - mountPath: /config
       name: torrent
+    - mountPath: /media/movies
+      name: movies
+      readonly: true
+    - mountPath: /media/tv
+      name: tv
+      readonly: true
 
   - name: jellyfin
     image: docker.io/jellyfin/jellyfin:latest
