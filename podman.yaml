@@ -26,6 +26,33 @@ spec:
     - mountPath: /data
       name: caddy
 
+  - name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
+    env:
+    - name: PUID
+      value: 1000
+    - name: PGID
+      value: 1000
+    - name: TZ
+      value: Etc/UTC
+    - name: WEBUI_PORT
+      value: 8080
+    - name: TORRENTING_PORT
+      value: 6881
+    ports:
+    - containerPort: 8080
+      hostPort: 8080
+      protocol: tcp
+    - containerPort: 6881
+      hostPort: 6881
+      protocol: tcp
+    - containerPort: 6881
+      hostPort: 6881
+      protocol: udp
+    volumeMounts:
+    - mountPath: /config
+      name: torrent
+
   - name: jellyfin
     image: docker.io/jellyfin/jellyfin:latest
     volumeMounts:
@@ -58,6 +85,9 @@ spec:
       path: /home/jellyfin/cache
       type: Directory
     name: cache
+  - persistentVolumeClaim:
+      claimName: torrent
+    name: torrent
   - persistentVolumeClaim:
       claimName: caddy
     name: caddy
