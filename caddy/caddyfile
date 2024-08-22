@@ -4,5 +4,5 @@ media.loveand.coffee {
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-	reverse_proxy jellyfin:8096
+	reverse_proxy :8096
 }

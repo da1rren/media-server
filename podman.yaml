@@ -22,6 +22,9 @@ spec:
     - containerPort: 443
       hostPort: 443
       protocol: tcp
+    volumeMounts:
+    - mountPath: /data
+      name: caddy
 
   - name: jellyfin
     image: docker.io/jellyfin/jellyfin:latest
@@ -34,8 +37,10 @@ spec:
       name: config
     - mountPath: /cache
       name: cache
-  hostNetwork: true
-  hostname: media
+    ports:
+    - containerPort: 8096
+      hostPort: 8096
+      protocol: tcp
   volumes:
   - hostPath:
       path: /home/jellyfin/media/movies
@@ -53,3 +58,6 @@ spec:
       path: /home/jellyfin/cache
       type: Directory
     name: cache
+  - persistentVolumeClaim:
+      claimName: caddy
+    name: caddy
