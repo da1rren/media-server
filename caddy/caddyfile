@@ -1,0 +1,7 @@
+media.loveand.coffee {
+    tls {
+        dns cloudflare {env.CF_API_TOKEN}
+    }
+
+	reverse_proxy :8096
+}
