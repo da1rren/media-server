@@ -1,4 +1,4 @@
-media.loveand.coffee {
+jellyfin.loveand.coffee {
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
