@@ -7,6 +7,8 @@
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo apt-get -y install podman
 sudo apt-get -y install just
+sudo ufw allow 6881/tcp
+sudo ufw allow 6881/udp
 ```
 
 ### Create host directory structure
@@ -17,8 +19,11 @@ mkdir -p /home/jellyfin/media/movies
 mkdir -p /home/jellyfin/media/tv
 ```
 
-###
+### Allow lowers ports to be bound by podman
 Add `net.ipv4.ip_unprivileged_port_start=80` to /etc/sysctl.conf then reboot
+
+### Install netdata
+Generate in web ui for auto deploy
 
 ### Create cf secret
 
