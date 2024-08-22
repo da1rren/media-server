@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   creationTimestamp: "2024-08-22T12:48:15Z"
   labels:
-    app: caddy-pod
-  name: caddy-pod
+    app: media
+  name: media
 spec:
   containers:
   - name: caddy

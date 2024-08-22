@@ -26,3 +26,5 @@ mkdir /home/jellyfin/config
 mkdir /home/jellyfin/media
 mkdir /home/jellyfin/media/movies
 mkdir /home/jellyfin/media/tv
+
+podman kube play --network bridge pod.yaml
