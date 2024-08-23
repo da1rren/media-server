@@ -19,6 +19,9 @@ jellyfin.loveand.coffee, jellyfin2.loveand.coffee {
 }
 
 torrent.loveand.coffee {
+	@denied not remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
+	abort @denied
+
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
@@ -28,6 +31,9 @@ torrent.loveand.coffee {
 }
 
 pi.loveand.coffee {
+	@denied not remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
+	abort @denied
+
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}

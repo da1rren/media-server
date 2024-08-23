@@ -61,14 +61,15 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-      
-  update-media-pi:
-    runs-on: media
-    needs: build-and-push-image
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Update podman
-        run: |
-          just rebuild
+# This seems to be breaking networking   
+#  update-media-pi:
+#    runs-on: media
+#    needs: build-and-push-image
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
+#
+#      - name: Update podman
+#        run: |
+#          just rebuild
