@@ -18,8 +18,8 @@ jellyfin.loveand.coffee {
 	reverse_proxy :8096
 }
 
-torrent.loveand.coffee, torrent2.loveand.coffee {
-	@allowed client_ip 100.64.0.0/10
+torrent.loveand.coffee {
+	@allowed client_ip private_ranges 100.64.0.0/10
 
 	tls {
 		resolvers 1.1.1.1
@@ -36,7 +36,7 @@ torrent.loveand.coffee, torrent2.loveand.coffee {
 }
 
 pi.loveand.coffee {
-	@allowed client_ip 100.64.0.0/10
+	@allowed client_ip private_ranges 100.64.0.0/10
 
 	tls {
 		resolvers 1.1.1.1
