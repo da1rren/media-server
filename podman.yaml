@@ -74,6 +74,7 @@ spec:
     - containerPort: 8096
       hostPort: 8096
       protocol: tcp
+  restartPolicy: always
   volumes:
   - hostPath:
       path: /home/jellyfin/media/movies
