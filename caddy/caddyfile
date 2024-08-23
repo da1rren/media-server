@@ -25,3 +25,12 @@ torrent.loveand.coffee {
 
 	reverse_proxy :8080
 }
+
+pi.loveand.coffee {
+    tls {
+        resolvers 1.1.1.1
+        dns cloudflare {env.CF_API_TOKEN}
+    }
+
+	reverse_proxy pi.hole:80
+}
