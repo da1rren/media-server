@@ -1,54 +1,44 @@
 {
-    dynamic_dns {
-        provider cloudflare {env.CF_API_TOKEN}
-        versions ipv4
+	dynamic_dns {
+		provider cloudflare {env.CF_API_TOKEN}
+		versions ipv4
 
-        domains {
-            loveand.coffee jellyfin
-        }
-    }
+		domains {
+			loveand.coffee jellyfin
+		}
+	}
 }
 
 jellyfin.loveand.coffee {
-    tls {
-        resolvers 1.1.1.1
-        dns cloudflare {env.CF_API_TOKEN}
-    }
+	tls {
+		resolvers 1.1.1.1
+		dns cloudflare {env.CF_API_TOKEN}
+	}
 
-    reverse_proxy :8096
+	reverse_proxy :8096
 }
 
 torrent.loveand.coffee {
-    tls {
-        resolvers 1.1.1.1
-        dns cloudflare {env.CF_API_TOKEN}
-    }
+	@denied not remote_ip private_ranges
+	abort @denied
 
-    @internal {
-        remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
-    }
+	tls {
+		resolvers 1.1.1.1
+		dns cloudflare {env.CF_API_TOKEN}
+	}
 
-    handle @internal {
-        reverse_proxy :8080
-    }
-
-    respond "<h1>Nice try, access denied ;)</h1>" 403
+    reverse_proxy :8080
 }
 
 pi.loveand.coffee {
-    tls {
-        resolvers 1.1.1.1
-        dns cloudflare {env.CF_API_TOKEN}
-    }
+	@denied not remote_ip private_ranges
+	abort @denied
 
-    @internal {
-        remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
-    }
-
-    handle @internal {
-        rewrite * /admin{uri}
-        reverse_proxy pi.hole:80
-    }
-
-    respond "<h1>Nice try, access denied ;)</h1>" 403
+	tls {
+		resolvers 1.1.1.1
+		dns cloudflare {env.CF_API_TOKEN}
+	}
+    
+    rewrite * /admin{uri}
+    reverse_proxy pi.hole:80
 }
