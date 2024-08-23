@@ -4,12 +4,12 @@
         versions ipv4
 
         domains {
-            loveand.coffee jellyfin2
+            loveand.coffee jellyfin
         }
     }
 }
 
-jellyfin.loveand.coffee, jellyfin2.loveand.coffee {
+jellyfin.loveand.coffee {
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
