@@ -1,5 +1,5 @@
 build: pull
-	podman kube play podman.yaml --network bridge --replace
+	podman kube play podman.yaml --network pasta --replace
 
 clean: 
 	podman kube down podman.yaml
