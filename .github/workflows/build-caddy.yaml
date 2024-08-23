@@ -60,7 +60,7 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       
-  build-and-push-image:
+  update-media-pi:
     runs-on: media
     needs: build-and-push-image
     steps:
