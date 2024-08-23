@@ -30,7 +30,8 @@ torrent.loveand.coffee, torrent2.loveand.coffee {
 		reverse_proxy :8080
 	}
 
-	respond "Sorry 403" 403
+    header Content-Type text/plain
+    respond "Sorry 403, {{.RemoteIP}} isn't allowed"
 }
 
 pi.loveand.coffee {
@@ -46,5 +47,6 @@ pi.loveand.coffee {
 		reverse_proxy pi.hole:80
 	}
 
-	respond "Sorry 403" 403
+    header Content-Type text/plain
+    respond "Sorry 403, {{.RemoteIP}} isn't allowed"
 }
