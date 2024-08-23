@@ -1,6 +1,7 @@
 {
     dynamic_dns {
         provider cloudflare {env.CF_API_TOKEN}
+        versions ipv4
 
         domains {
             loveand.coffee jellyfin2
@@ -8,13 +9,13 @@
     }
 }
 
-jellyfin.loveand.coffee {
+jellyfin.loveand.coffee, jellyfin2.loveand.coffee {
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-	reverse_proxy :8096
+    reverse_proxy :8096
 }
 
 torrent.loveand.coffee {
@@ -23,7 +24,7 @@ torrent.loveand.coffee {
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-	reverse_proxy :8080
+    reverse_proxy :8080
 }
 
 pi.loveand.coffee {
@@ -32,5 +33,5 @@ pi.loveand.coffee {
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-	reverse_proxy pi.hole:80
+    reverse_proxy pi.hole:80
 }
