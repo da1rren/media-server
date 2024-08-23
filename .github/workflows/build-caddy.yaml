@@ -71,6 +71,4 @@ jobs:
 
       - name: Update podman
         run: |
-          id
-          whoami
-          just build
+          just rebuild
