@@ -30,9 +30,11 @@ torrent.loveand.coffee {
 		reverse_proxy :8080
 	}
 
-    header Content-Type text/plain
-	templates
-    respond "Sorry 403, {{.RemoteIP}} isn't allowed"
+	handle {
+		header Content-Type text/plain
+		templates
+		respond "Sorry 403, {{.RemoteIP}} isn't allowed"
+	}
 }
 
 pi.loveand.coffee {
@@ -48,7 +50,9 @@ pi.loveand.coffee {
 		reverse_proxy pi.hole:80
 	}
 
-    header Content-Type text/plain
-	templates
-    respond "Sorry 403, {{.RemoteIP}} isn't allowed"
+	handle {
+		header Content-Type text/plain
+		templates
+		respond "Sorry 403, {{.RemoteIP}} isn't allowed"
+	}
 }
