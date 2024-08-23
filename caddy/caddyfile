@@ -19,28 +19,36 @@ jellyfin.loveand.coffee {
 }
 
 torrent.loveand.coffee {
-	@denied not remote_ip private_ranges
-	respond @denied "Nope" 403
-    abort @denied
+	@isPrivate remote_ip private_ranges
 
 	tls {
 		resolvers 1.1.1.1
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-    reverse_proxy :8080
+	handle @isPrivate {
+		reverse_proxy :8080
+	}
+
+	handle {
+		respond @denied "Nope" 403
+	}
 }
 
 pi.loveand.coffee {
-	@denied not remote_ip private_ranges
-	respond @denied "Nope" 403
-    abort @denied
+	@isPrivate remote_ip private_ranges
 
 	tls {
 		resolvers 1.1.1.1
 		dns cloudflare {env.CF_API_TOKEN}
 	}
     
-    rewrite * /admin{uri}
-    reverse_proxy pi.hole:80
+	handle @isPrivate {
+		rewrite * /admin{uri}
+		reverse_proxy pi.hole:80
+	}
+
+	handle {
+		respond @denied "Nope" 403
+	}
 }
