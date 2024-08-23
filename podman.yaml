@@ -52,19 +52,14 @@ spec:
     volumeMounts:
     - mountPath: /config
       name: torrent
-#    - mountPath: /downloads/movies
-#      name: movies
     - mountPath: /downloads
-      name: tv
+      name: shows
 
   - name: jellyfin
     image: docker.io/jellyfin/jellyfin:latest
     volumeMounts:
-    - mountPath: /media/movies
-      name: movies
-      readonly: true
-    - mountPath: /media/tv
-      name: tv
+    - mountPath: /media/shows
+      name: shows
       readonly: true
     - mountPath: /config
       name: config
@@ -77,13 +72,9 @@ spec:
   restartPolicy: always
   volumes:
   - hostPath:
-      path: /home/jellyfin/media/movies
+      path: /home/jellyfin/media/shows
       type: Directory
-    name: movies
-  - hostPath:
-      path: /home/jellyfin/media/tv
-      type: Directory
-    name: tv
+    name: shows
   - hostPath:
       path: /home/jellyfin/config
       type: Directory
