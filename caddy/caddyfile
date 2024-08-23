@@ -31,6 +31,7 @@ torrent.loveand.coffee, torrent2.loveand.coffee {
 	}
 
     header Content-Type text/plain
+	templates
     respond "Sorry 403, {{.RemoteIP}} isn't allowed"
 }
 
@@ -48,5 +49,6 @@ pi.loveand.coffee {
 	}
 
     header Content-Type text/plain
+	templates
     respond "Sorry 403, {{.RemoteIP}} isn't allowed"
 }
