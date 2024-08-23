@@ -30,7 +30,7 @@ torrent.loveand.coffee, torrent2.loveand.coffee {
 		reverse_proxy :8080
 	}
 
-	response "Sorry 403" 403
+	respond "Sorry 403" 403
 }
 
 pi.loveand.coffee {
@@ -46,5 +46,5 @@ pi.loveand.coffee {
 		reverse_proxy pi.hole:80
 	}
 
-	response "Sorry 403" 403
+	respond "Sorry 403" 403
 }
