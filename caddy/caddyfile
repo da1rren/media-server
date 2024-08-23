@@ -33,5 +33,6 @@ pi.loveand.coffee {
         dns cloudflare {env.CF_API_TOKEN}
     }
 
+    rewrite * /admin{uri}
     reverse_proxy pi.hole:80
 }
