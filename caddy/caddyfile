@@ -15,4 +15,3 @@ torrent.loveand.coffee {
 
 	reverse_proxy :8080
 }
-
