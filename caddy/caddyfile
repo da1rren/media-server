@@ -24,7 +24,7 @@ torrent.loveand.coffee, torrent2.loveand.coffee {
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-    @denied not remote_ip private_ranges 100.64.0.0/10
+    @denied not client_ip private_ranges 100.64.0.0/10
     abort @denied
 	reverse_proxy :8080
 }
@@ -35,7 +35,7 @@ pi.loveand.coffee {
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-    @denied not remote_ip private_ranges 100.64.0.0/10    
+    @denied not client_ip private_ranges 100.64.0.0/10    
     abort @denied
 	rewrite * /admin{uri}
 	reverse_proxy pi.hole:80
