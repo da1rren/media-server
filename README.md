@@ -32,4 +32,7 @@ Add the token with `zone.zone:read` & `zone.dns.edit` then run:
 `cat secrets.yaml | podman secret create media-secrets`
 
 ### Start all the pods
-`podman kube play --network bridge pod.yaml`
+`just build`
+
+### Cronjob
+Run `crontab -e` & add `@reboot /home/darren/repos/media-server/cron.sh` then run `loginctl enable-linger` to make the pods start at start up.  As podman wont auto start them as its daemonless.  We need to enable-linger as systemctl remove the users temporary directories when the aren't logged in.
