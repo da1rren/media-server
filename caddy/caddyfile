@@ -19,24 +19,32 @@ jellyfin.loveand.coffee {
 }
 
 torrent.loveand.coffee, torrent2.loveand.coffee {
+	@allowed client_ip 100.64.0.0/10
+
 	tls {
 		resolvers 1.1.1.1
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-    @denied not client_ip private_ranges 100.64.0.0/10
-    abort @denied
-	reverse_proxy :8080
+	handle @allowed {
+		reverse_proxy :8080
+	}
+
+	response "Sorry 403" 403
 }
 
 pi.loveand.coffee {
+	@allowed client_ip 100.64.0.0/10
+
 	tls {
 		resolvers 1.1.1.1
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-    @denied not client_ip private_ranges 100.64.0.0/10    
-    abort @denied
-	rewrite * /admin{uri}
-	reverse_proxy pi.hole:80
+	handle @allowed {
+		rewrite * /admin{uri}
+		reverse_proxy pi.hole:80
+	}
+
+	response "Sorry 403" 403
 }
