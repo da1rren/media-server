@@ -62,14 +62,13 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
-# This seems to be breaking networking   
-#  update-media-pi:
-#    runs-on: media
-#    needs: build-and-push-image
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#
-#      - name: Update podman
-#        run: |
-#          just rebuild
+  update-media-pi:
+    runs-on: media
+    needs: build-and-push-image
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update podman
+        run: |
+          just rebuild
