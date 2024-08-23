@@ -20,7 +20,7 @@ jellyfin.loveand.coffee {
 
 torrent.loveand.coffee {
 	@denied not remote_ip private_ranges
-	abort @denied
+	respond @denied "Nope" 403
 
 	tls {
 		resolvers 1.1.1.1
@@ -32,7 +32,7 @@ torrent.loveand.coffee {
 
 pi.loveand.coffee {
 	@denied not remote_ip private_ranges
-	abort @denied
+	respond @denied "Nope" 403
 
 	tls {
 		resolvers 1.1.1.1
