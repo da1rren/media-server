@@ -1,4 +1,4 @@
-build:
+build: pull
 	podman kube play podman.yaml --network bridge --replace
 
 clean: 
