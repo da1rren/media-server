@@ -69,5 +69,6 @@ jobs:
 
       - name: Update podman
         run: |
-          ls
+          id
+          whoami
           just build
