@@ -31,7 +31,7 @@ torrent.loveand.coffee {
 	}
 
 	handle {
-		respond @denied "Nope" 403
+		respond "Nope" 403
 	}
 }
 
@@ -49,6 +49,6 @@ pi.loveand.coffee {
 	}
 
 	handle {
-		respond @denied "Nope" 403
+		respond "Nope" 403
 	}
 }
