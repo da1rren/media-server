@@ -27,9 +27,7 @@ torrent.loveand.coffee {
 	}
 
 	handle @allowed {
-		header Content-Type text/plain
-		templates
-		respond "{{.RemoteIP}} is allowed"
+		reverse_proxy :8080
 	}
 
 	handle {
