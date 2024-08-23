@@ -3,7 +3,7 @@
         provider cloudflare {env.CF_API_TOKEN}
 
         domains {
-            jellyfin2.loveand.coffee
+            loveand.coffee jellyfin2
         }
     }
 }
