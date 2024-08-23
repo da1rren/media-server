@@ -19,26 +19,36 @@ jellyfin.loveand.coffee {
 }
 
 torrent.loveand.coffee {
-	@denied not remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
-	abort @denied
-
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-    reverse_proxy :8080
+    @internal {
+        remote_ip forwarded 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
+    }
+
+    handle @internal {
+        reverse_proxy :8080
+    }
+
+    respond "<h1>Nice try, access denied ;)</h1>" 403
 }
 
 pi.loveand.coffee {
-	@denied not remote_ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
-	abort @denied
-
     tls {
         resolvers 1.1.1.1
         dns cloudflare {env.CF_API_TOKEN}
     }
 
-    rewrite * /admin{uri}
-    reverse_proxy pi.hole:80
+    @internal {
+        remote_ip forwarded 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 100.64.0.0/10
+    }
+
+    handle @internal {
+        rewrite * /admin{uri}
+        reverse_proxy pi.hole:80
+    }
+
+    respond "<h1>Nice try, access denied ;)</h1>" 403
 }
