@@ -8,7 +8,6 @@ services:
   jellyfin:
     image: docker.io/jellyfin/jellyfin:latest
     container_name: media-jellyfin
-    network_mode: 'host'
     volumes:
       - /home/jellyfin/config:/config
       - /home/jellyfin/cache:/cache
@@ -24,18 +23,21 @@ services:
 
   caddy:
     image: ghcr.io/da1rren/caddy:main
+    pull_policy: always
     container_name: media-caddy
     ports:
       - 80:80
       - 443:443
     volumes:
       - caddy:/data
+    restart: 'unless-stopped'
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: media-qbittorrent
+    restart: 'unless-stopped'
     environment:
       - PUID=1000
       - PGID=1000
@@ -55,6 +57,7 @@ services:
 
   watchtower:
     image: containrrr/watchtower
+    restart: 'unless-stopped'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/.docker/config.json:/config.json
