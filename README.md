@@ -29,6 +29,13 @@ Generate in web ui for auto deploy
 
 Add the token with `zone.zone:read` & `zone.dns.edit` then create an env file from the template
 
+### Mount the drive with fstab
+
+The UUID can be obtained with `sudo blkid`
+
+For example:
+`UUID=3e96d644-17ee-4637-a1f3-7612312f5d3b       /home/jellyfin/media/shows      ext4    noatime,x-systemd.automount,x-systemd.device-timeout=10,x-systemd.idle-timeout=1min 0 2`
+
 ### Start all the pods
 `just build`
 
