@@ -2,7 +2,16 @@
 
 ## Setup
 
-### Install podman, just and tailscale
+### Configure docker logs
+Create/add (If using snap) `/var/snap/docker/current/config/daemon.json` with the contents:
+
+```
+{
+  "log-driver": "journald"
+}
+```
+
+### Install docker, just and tailscale
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo snap install docker
