@@ -1,16 +1,13 @@
-build: pull
-	podman kube play podman.yaml --network pasta --replace
+build:
+	docker compose up --pull
 
 clean: 
-	podman kube down podman.yaml
+	docker compose down
 
-rebuild: pull clean build
-
-pull:
-	podman pull ghcr.io/da1rren/caddy:main
+rebuild: clean build
 
 exec:
-	podman exec -it media-caddy /bin/sh
+	docker exec -it media-caddy /bin/sh
 
 logs:
-	podman logs -f media-caddy
+	docker logs -f media-caddy

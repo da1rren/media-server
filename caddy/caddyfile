@@ -16,7 +16,7 @@ jellyfin.loveand.coffee {
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-	reverse_proxy :8096
+	reverse_proxy media-jellyfin:8096
 }
 
 torrent.loveand.coffee {
@@ -26,7 +26,7 @@ torrent.loveand.coffee {
 	}
 
 	handle {
-		reverse_proxy :8080
+		reverse_proxy media-qbittorrent:8080
 	}
 }
 

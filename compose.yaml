@@ -1,0 +1,61 @@
+version: "3"
+
+volumes:
+  caddy:
+  torrent:
+
+services:
+  jellyfin:
+    image: docker.io/jellyfin/jellyfin:latest
+    container_name: media-jellyfin
+    network_mode: 'host'
+    volumes:
+      - /home/jellyfin/config:/config
+      - /home/jellyfin/cache:/cache
+      - type: bind
+        source: /home/jellyfin/media/shows
+        target: /media/shows
+        read_only: true
+    devices:
+      - /dev/dri/:/dev/dri/
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.loveand.coffee/
+
+  caddy:
+    image: ghcr.io/da1rren/caddy:main
+    container_name: media-caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy:/data
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: media-qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    ports:
+      - 8080:8080
+      - 6881:6881/tcp
+      - 6881:6881/udp
+    volumes:
+      - torrent:/config
+      - type: bind
+        source: /home/jellyfin/media/shows
+        target: /downloads
+        read_only: false
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 3600
