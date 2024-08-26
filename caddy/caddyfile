@@ -11,22 +11,40 @@
 }
 
 jellyfin.loveand.coffee {
+	@allowed client_ip cloudflare
+
 	tls {
 		resolvers 1.1.1.1
 		dns cloudflare {env.CF_API_TOKEN}
 	}
 
-	reverse_proxy media-jellyfin:8096
-}
-
-torrent.loveand.coffee {
-	tls {
-		resolvers 1.1.1.1
-		dns cloudflare {env.CF_API_TOKEN}
+	handle @allowed {
+		reverse_proxy media-jellyfin:8096
 	}
 
 	handle {
+		header Content-Type text/plain
+		templates
+		respond "Sorry 403, {{.RemoteIP}} isn't allowed"
+	}
+}
+
+torrent.loveand.coffee {
+	@allowed client_ip cloudflare
+
+	tls {
+		resolvers 1.1.1.1
+		dns cloudflare {env.CF_API_TOKEN}
+	}
+
+	handle @allowed {
 		reverse_proxy media-qbittorrent:8080
+	}
+
+	handle {
+		header Content-Type text/plain
+		templates
+		respond "Sorry 403, {{.RemoteIP}} isn't allowed"
 	}
 }
 
