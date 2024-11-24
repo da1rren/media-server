@@ -55,7 +55,9 @@ services:
       - type: bind
         source: /home/jellyfin/media/shows
         target: /downloads
-        read_only: false
+      - type: bind
+        source: /home/jellyfin/media/movies
+        target: /downloads/movies
 
   watchtower:
     image: containrrr/watchtower
