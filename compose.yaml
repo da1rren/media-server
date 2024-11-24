@@ -14,7 +14,9 @@ services:
       - type: bind
         source: /home/jellyfin/media/shows
         target: /media/shows
-        read_only: true
+      - type: bind
+        source: /home/jellyfin/media/movies
+        target: /media/movies
     devices:
       - /dev/dri/:/dev/dri/
     restart: 'unless-stopped'
