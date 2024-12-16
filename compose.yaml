@@ -58,6 +58,9 @@ services:
       - type: bind
         source: /home/jellyfin/media/movies
         target: /downloads/movies
+      - type: bind
+        source: /home/jellyfin/media/torrents
+        target: /media/torrents
 
   watchtower:
     image: containrrr/watchtower
