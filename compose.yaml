@@ -57,7 +57,7 @@ services:
         target: /downloads
       - type: bind
         source: /home/jellyfin/media/movies
-        target: /downloads/movies
+        target: /movies
       - type: bind
         source: /home/jellyfin/media/torrents
         target: /media/torrents
