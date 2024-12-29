@@ -11,6 +11,7 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     command: tunnel --no-autoupdate run
+    restart: 'unless-stopped'
 
   jellyfin:
     image: docker.io/jellyfin/jellyfin:latest
