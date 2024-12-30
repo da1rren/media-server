@@ -74,9 +74,6 @@ services:
       - /home/jellyfin/radarr/config:/config
       - /home/jellyfin/radarr/data:/data
       - type: bind
-        source: /home/jellyfin/media/shows
-        target: /content/shows
-      - type: bind
         source: /home/jellyfin/media/movies
         target: /content/movies
 
@@ -97,9 +94,6 @@ services:
       - type: bind
         source: /home/jellyfin/media/shows
         target: /content/shows
-      - type: bind
-        source: /home/jellyfin/media/movies
-        target: /content/movies
 
   watchtower:
     image: containrrr/watchtower
