@@ -50,11 +50,14 @@ services:
     volumes:
       - torrent:/config
       - type: bind
-        source: /home/jellyfin/media/shows
+        source: /home/jellyfin/media/downloads
         target: /downloads
       - type: bind
         source: /home/jellyfin/media/movies
-        target: /movies
+        target: /content/movies
+      - type: bind
+        source: /home/jellyfin/media/shows
+        target: /content/shows
       - type: bind
         source: /home/jellyfin/media/torrents
         target: /media/torrents
@@ -74,6 +77,9 @@ services:
       - /home/jellyfin/radarr/config:/config
       - /home/jellyfin/radarr/data:/data
       - type: bind
+        source: /home/jellyfin/media/downloads
+        target: /downloads
+      - type: bind
         source: /home/jellyfin/media/movies
         target: /content/movies
 
@@ -91,6 +97,9 @@ services:
     volumes:
       - /home/jellyfin/sonarr/config:/config
       - /home/jellyfin/sonarr/data:/data
+      - type: bind
+        source: /home/jellyfin/media/downloads
+        target: /downloads
       - type: bind
         source: /home/jellyfin/media/shows
         target: /content/shows
