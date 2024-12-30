@@ -59,6 +59,36 @@ services:
         source: /home/jellyfin/media/torrents
         target: /media/torrents
 
+  radarr:
+    container_name: media-radarr
+    image: ghcr.io/hotio/radarr
+    restart: 'unless-stopped'
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - /home/jellyfin/radarr/config:/config
+      - /home/jellyfin/radarr/data:/data
+
+  sonarr:
+    container_name: media-sonarr
+    image: ghcr.io/hotio/sonarr
+    restart: 'unless-stopped'
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - /home/jellyfin/sonarr/config:/config
+      - /home/jellyfin/sonarr/data:/data
+
   watchtower:
     image: containrrr/watchtower
     container_name: media-watchtower
