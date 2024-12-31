@@ -23,6 +23,9 @@ services:
         source: /home/jellyfin/media/shows
         target: /media/shows
       - type: bind
+        source: /home/jellyfin/media/series
+        target: /media/series
+      - type: bind
         source: /home/jellyfin/media/movies
         target: /media/movies
     devices:
