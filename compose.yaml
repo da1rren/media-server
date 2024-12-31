@@ -32,6 +32,10 @@ services:
       - 8096:8096
     environment:
       - JELLYFIN_PublishedServerUrl=https://jellyfin.loveand.coffee/
+      resources:
+        reservations:
+          cpus: '2'
+          memory: 6G
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -64,8 +68,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 50m
-          memory: 512M
+          cpus: 25m
+          memory: 256M
 
   radarr:
     container_name: media-radarr
@@ -90,8 +94,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 50m
-          memory: 128M
+          cpus: 25m
+          memory: 256M
 
   sonarr:
     container_name: media-sonarr
@@ -116,8 +120,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 50m
-          memory: 128M
+          cpus: 25m
+          memory: 256M
 
   jackett:
     container_name: media-jackett
@@ -135,8 +139,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 50m
-          memory: 128M
+          cpus: 25m
+          memory: 256M
 
   watchtower:
     image: containrrr/watchtower
