@@ -32,10 +32,10 @@ services:
       - 8096:8096
     environment:
       - JELLYFIN_PublishedServerUrl=https://jellyfin.loveand.coffee/
-      resources:
-        reservations:
-          cpus: '2'
-          memory: 6G
+    resources:
+      reservations:
+        cpus: '2'
+        memory: 6G
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
