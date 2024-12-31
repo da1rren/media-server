@@ -61,6 +61,11 @@ services:
       - type: bind
         source: /home/jellyfin/media/torrents
         target: /media/torrents
+    deploy:
+      resources:
+        limits:
+          cpus: 50m
+          memory: 512M
 
   radarr:
     container_name: media-radarr
@@ -82,6 +87,11 @@ services:
       - type: bind
         source: /home/jellyfin/media/movies
         target: /content/movies
+    deploy:
+      resources:
+        limits:
+          cpus: 50m
+          memory: 128M
 
   sonarr:
     container_name: media-sonarr
@@ -103,6 +113,11 @@ services:
       - type: bind
         source: /home/jellyfin/media/shows
         target: /content/shows
+    deploy:
+      resources:
+        limits:
+          cpus: 50m
+          memory: 128M
 
   jackett:
     container_name: media-jackett
@@ -117,6 +132,11 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /home/jellyfin/jackett/config:/config
+    deploy:
+      resources:
+        limits:
+          cpus: 50m
+          memory: 128M
 
   watchtower:
     image: containrrr/watchtower
