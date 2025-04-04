@@ -146,6 +146,18 @@ services:
           cpus: 25m
           memory: 256M
 
+  excalidraw:
+    image: excalidraw/excalidraw:latest
+    container_name: excalidraw
+    restart: unless-stopped
+    stdin_open: true
+    healthcheck:
+      disable: true
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+
   watchtower:
     image: containrrr/watchtower
     container_name: media-watchtower
