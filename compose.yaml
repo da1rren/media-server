@@ -39,7 +39,7 @@ services:
 
   protonvpn:
     image: docker.io/qmcgaw/gluetun:latest
-    container_name: protonvpn
+    container_name: media-protonvpn
     cap_add:
       - NET_ADMIN
     devices:
