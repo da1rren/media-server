@@ -40,6 +40,7 @@ services:
   protonvpn:
     image: docker.io/qmcgaw/gluetun:latest
     container_name: protonvpn
+    network_mode: "service:protonvpn"
     cap_add:
       - NET_ADMIN
     devices:
@@ -60,30 +61,13 @@ services:
     ports:
       - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
     restart: unless-stopped
-    
-  jellyfin:
-    image: docker.io/jellyfin/jellyfin:latest
-    container_name: media-jellyfin
-    volumes:
-      - /home/jellyfin/config:/config
-      - /home/jellyfin/cache:/cache
-      - shows:/media/shows
-      - movies:/media/movies
-    devices:
-      - /dev/dri/:/dev/dri/
-    restart: 'unless-stopped'
-    environment:
-      - JELLYFIN_PublishedServerUrl=https://jellyfin.loveand.coffee/
-    deploy:
-      resources:
-        reservations:
-          cpus: "2"
-          memory: "6G"
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: media-qbittorrent
     restart: 'unless-stopped'
+    depends_on:
+      - protonvpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -105,6 +89,25 @@ services:
         limits:
           cpus: 0.25
           memory: "256M"
+
+  jellyfin:
+    image: docker.io/jellyfin/jellyfin:latest
+    container_name: media-jellyfin
+    volumes:
+      - /home/jellyfin/config:/config
+      - /home/jellyfin/cache:/cache
+      - shows:/media/shows
+      - movies:/media/movies
+    devices:
+      - /dev/dri/:/dev/dri/
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.loveand.coffee/
+    deploy:
+      resources:
+        reservations:
+          cpus: "2"
+          memory: "6G"
 
   radarr:
     container_name: media-radarr
