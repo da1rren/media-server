@@ -1,6 +1,32 @@
 volumes:
-  caddy:
   torrent:
+  movies:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=unas-4.localdomain,nolock,soft,rw"
+      device: ":/var/nfs/shared/media/movies"
+
+  shows:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=unas-4.localdomain,nolock,soft,rw"
+      device: ":/var/nfs/shared/media/shows"
+
+  torrents:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=unas-4.localdomain,nolock,soft,rw"
+      device: ":/var/nfs/shared/torrents"
+
+  downloading:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=unas-4.localdomain,nolock,soft,rw"
+      device: ":/var/nfs/shared/downloading"
 
 services:
   cloudflared:
@@ -17,12 +43,8 @@ services:
     volumes:
       - /home/jellyfin/config:/config
       - /home/jellyfin/cache:/cache
-      - type: bind
-        source: /data/media/shows
-        target: /media/shows
-      - type: bind
-        source: /data/media/movies
-        target: /media/movies
+      - shows:/media/shows
+      - movies:/media/movies
     devices:
       - /dev/dri/:/dev/dri/
     restart: 'unless-stopped'
@@ -52,18 +74,10 @@ services:
       - 6881:6881/udp
     volumes:
       - torrent:/config
-      - type: bind
-        source: /data/downloading
-        target: /downloads
-      - type: bind
-        source: /data/media/movies
-        target: /content/movies
-      - type: bind
-        source: /data/media/shows
-        target: /content/shows
-      - type: bind
-        source: /data/torrents
-        target: /media/torrents
+      - movies:/content/movies
+      - shows:/content/shows
+      - downloading:/downloads
+      - torrents:/media/torrents
     deploy:
       resources:
         limits:
@@ -84,12 +98,8 @@ services:
     volumes:
       - /home/jellyfin/radarr/config:/config
       - /home/jellyfin/radarr/data:/data
-      - type: bind
-        source: /data/downloading
-        target: /downloads
-      - type: bind
-        source: /data/media/movies
-        target: /content/movies
+      - downloading:/downloads
+      - movies:/content/movies
     deploy:
       resources:
         limits:
@@ -110,12 +120,8 @@ services:
     volumes:
       - /home/jellyfin/sonarr/config:/config
       - /home/jellyfin/sonarr/data:/data
-      - type: bind
-        source: /data/downloading
-        target: /downloads
-      - type: bind
-        source: /data/media/shows
-        target: /content/shows
+      - downloading:/downloads
+      - shows:/content/shows
     deploy:
       resources:
         limits:
