@@ -12,6 +12,14 @@ jobs:
     runs-on: media
     env:
       TUNNEL_TOKEN: ${{ secrets.TUNNEL_TOKEN }}
+      TZ: "Etc/UTC"
+      QBITTORRENT_WEBUI_PORT: "8096"
+      VPN_SERVICE_PROVIDER: protonvpn
+      VPN_TYPE: openvpn
+      OPENVPN_USER: ${{ secrets.OPENVPN_USER }}
+      OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+      SERVER_COUNTRIES: Netherlands,Germany
+      VPN_PORT_FORWARDING: on
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
