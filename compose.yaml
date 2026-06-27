@@ -40,7 +40,6 @@ services:
   protonvpn:
     image: docker.io/qmcgaw/gluetun:latest
     container_name: protonvpn
-    network_mode: "service:protonvpn"
     cap_add:
       - NET_ADMIN
     devices:
@@ -66,6 +65,7 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: media-qbittorrent
     restart: 'unless-stopped'
+    network_mode: "service:protonvpn"
     depends_on:
       - protonvpn
     environment:
