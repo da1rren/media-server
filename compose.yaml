@@ -74,10 +74,10 @@ services:
       - TZ=${TZ}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
       - TORRENTING_PORT=6881
-    ports:
-      - 8080:8080
-      - 6881:6881/tcp
-      - 6881:6881/udp
+    # ports:
+    #   - 8080:8080
+    #   - 6881:6881/tcp
+    #   - 6881:6881/udp
     volumes:
       - torrent:/config
       - movies:/content/movies
