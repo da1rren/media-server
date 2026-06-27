@@ -18,13 +18,10 @@ services:
       - /home/jellyfin/config:/config
       - /home/jellyfin/cache:/cache
       - type: bind
-        source: /home/jellyfin/media/shows
+        source: /data/media/shows
         target: /media/shows
       - type: bind
-        source: /home/jellyfin/media/series
-        target: /media/series
-      - type: bind
-        source: /home/jellyfin/media/movies
+        source: /data/media/movies
         target: /media/movies
     devices:
       - /dev/dri/:/dev/dri/
