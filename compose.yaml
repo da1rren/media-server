@@ -87,8 +87,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
-      - WEBUI_PORT=8080
+      - TZ=${TZ}
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
       - TORRENTING_PORT=6881
     ports:
       - 8080:8080
