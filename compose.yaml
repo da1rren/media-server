@@ -149,6 +149,20 @@ services:
           cpus: 0.25
           memory: "256M"
 
+  unpackerr:
+    container_name: media-unpackerr
+    image: ghcr.io/unpackerr/unpackerr:latest
+    restart: 'unless-stopped'
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - downloading:/downloads
+      - shows:/content/shows
+      - movies:/content/movies
+
   jackett:
     container_name: media-jackett
     image: ghcr.io/hotio/jackett
