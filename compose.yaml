@@ -153,15 +153,33 @@ services:
     container_name: media-unpackerr
     image: ghcr.io/unpackerr/unpackerr:latest
     restart: 'unless-stopped'
+    volumes:
+      - downloading:/downloads
+      - shows:/content/shows
+      - movies:/content/movies
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Etc/UTC
-    volumes:
-      - downloading:/downloads
-      - shows:/content/shows
-      - movies:/content/movies
+      ## Sonarr Settings
+      - UN_SONARR_0_URL=http://media-sonarr:8989
+      - UN_SONARR_0_API_KEY=${SONARR_API_KEY}
+      - UN_SONARR_0_PATHS_0=/downloads
+      - UN_SONARR_0_PROTOCOLS=torrent,TorrentDownloadProtocol
+      - UN_SONARR_0_TIMEOUT=10s
+      - UN_SONARR_0_DELETE_DELAY=5m
+      - UN_SONARR_0_DELETE_ORIG=false
+      - UN_SONARR_0_SYNCTHING=false
+      ## Radarr Settings
+      - UN_RADARR_0_URL=http://media-radarr:7878
+      - UN_RADARR_0_API_KEY=${RADARR_API_KEY}
+      - UN_RADARR_0_PATHS_0=/downloads
+      - UN_RADARR_0_PROTOCOLS=torrent,TorrentDownloadProtocol
+      - UN_RADARR_0_TIMEOUT=10s
+      - UN_RADARR_0_DELETE_DELAY=5m
+      - UN_RADARR_0_DELETE_ORIG=false
+      - UN_RADARR_0_SYNCTHING=false
 
   jackett:
     container_name: media-jackett

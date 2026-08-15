@@ -19,6 +19,8 @@ jobs:
       VPN_TYPE: openvpn
       OPENVPN_USER: ${{ secrets.OPENVPN_USER }}
       OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+      SONARR_API_KEY: ${{ secrets.SONARR_API_KEY }}
+      RADARR_API_KEY: ${{ secrets.RADARR_API_KEY }}
       SERVER_COUNTRIES: Netherlands,Germany
       VPN_PORT_FORWARDING: on
     steps:
