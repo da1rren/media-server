@@ -46,10 +46,9 @@ services:
       - /dev/net/tun:/dev/net/tun
     environment:
       - TZ=${TZ}
-      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
-      - VPN_TYPE=${VPN_TYPE}
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - VPN_PORT_FORWARDING=${VPN_PORT_FORWARDING}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
       - PORT_FORWARD_ONLY=on
